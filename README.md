@@ -1,2 +1,2 @@
-# optimise-gtm-universal-tag
-Optimise Universal Tracking Tag for GTM
+# Optimise Universal Tag for Google Tag Manager
+This is a Google Tag Manager Template to add the Optimise Universal tag.
