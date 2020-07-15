@@ -1,2 +1,6 @@
 homepage: "https://www.optimisemedia.com",
 documentation: "https://knowledge.optimisemedia.com/docs/advertiserimplementation#google-tag-manager",
+versions:
+  # Latest version
+  - sha: TBC
+    changeNotes: Initial release
