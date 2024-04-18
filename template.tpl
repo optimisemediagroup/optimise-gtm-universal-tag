@@ -104,7 +104,7 @@ log('Cookie = ' + getCookieValues('optimiseevent',true));
 
 //Inject script
 if (queryPermission('inject_script', qScriptUrl)) {
-  injectScript(qScriptUrl, data.gtmOnSuccess, data.gtmOnFailure);
+  injectScript(qScriptUrl);
 }
 
 // fire the tag
