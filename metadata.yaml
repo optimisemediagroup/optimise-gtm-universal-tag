@@ -2,5 +2,9 @@ homepage: "https://www.optimisemedia.com",
 documentation: "https://knowledge.optimisemedia.com/docs/advertiserimplementation#google-tag-manager",
 versions:
   # Latest version
+
+  - sha: 1ef5cdc9e007796807362600b97838e79930b6ee
+    changeNotes: Added Quote Script Functionallity.
+
   - sha: 4aa449441c4cb448f6c712b80570891dfe0c16b1
     changeNotes: Initial release
