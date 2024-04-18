@@ -85,7 +85,8 @@ if(getQueryParameters('sskey') != undefined) {
 
 // Declare script
 var ORef = encodeUriComponent(getUrl());
-var url = 'https://track.omguk.com/e/qi/?action=Content&MID=' + encodeUriComponent(MID) + '&PID=' + encodeUriComponent(PID) + '&ref=' + ORef;
+var qPixelUrl = 'https://track.omguk.com/e/qi/?action=Content&MID=' + encodeUriComponent(MID) + '&PID=' + encodeUriComponent(PID) + '&ref=' + ORef;
+var qScriptUrl = 'https://track.omguk.com/e/qs/?action=Content&MID=' + encodeUriComponent(MID) + '&PID=' + encodeUriComponent(PID) + '&ref=' + ORef;
 
 // Add cookie string if present
 //if(queryPermission('get_cookies')) { 
@@ -99,9 +100,11 @@ log('PID = ', encodeUriComponent(data.PID));
 log('SSKEY = ' + getQueryParameters('sskey'));
 log('Cookie = ' + getCookieValues('optimiseevent',true));
 
+//Inject script
+injectScript(qScriptUrl, data.gtmOnSuccess, data.gtmOnFailure);
+
 // fire the tag
 sendPixel(url, data.gtmOnSuccess, data.gtmOnFailure);
-
 
 ___WEB_PERMISSIONS___
 
