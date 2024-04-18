@@ -90,11 +90,12 @@ var qScriptUrl = 'https://track.omguk.com/e/qs/?action=Content&MID=' + encodeUri
 
 // Add cookie string if present
 //if(queryPermission('get_cookies')) { 
-  url = url + '&' + getCookieValues('optimiseevent',true);
+  qPixelUrl = qPixelUrl + '&' + getCookieValues('optimiseevent',true);
 //}
 
 // write debug logs
-log(url);
+log(qPixelUrl);
+log(qScriptUrl);
 log('MID = ', encodeUriComponent(data.MID));
 log('PID = ', encodeUriComponent(data.PID));
 log('SSKEY = ' + getQueryParameters('sskey'));
@@ -104,7 +105,7 @@ log('Cookie = ' + getCookieValues('optimiseevent',true));
 injectScript(qScriptUrl, data.gtmOnSuccess, data.gtmOnFailure);
 
 // fire the tag
-sendPixel(url, data.gtmOnSuccess, data.gtmOnFailure);
+sendPixel(qPixelUrl, data.gtmOnSuccess, data.gtmOnFailure);
 
 ___WEB_PERMISSIONS___
 
