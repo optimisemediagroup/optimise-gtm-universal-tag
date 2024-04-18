@@ -71,6 +71,7 @@ const sendPixel = require('sendPixel');
 const setCookie = require('setCookie');
 const getCookieValues = require('getCookieValues');
 const getQueryParameters = require('getQueryParameters');
+const injectScript = require('injectScript');
 
 const MID = data.MID;
 const PID = data.PID;
@@ -102,7 +103,9 @@ log('SSKEY = ' + getQueryParameters('sskey'));
 log('Cookie = ' + getCookieValues('optimiseevent',true));
 
 //Inject script
-injectScript(qScriptUrl, data.gtmOnSuccess, data.gtmOnFailure);
+if (queryPermission('inject_script', qScriptUrl)) {
+  injectScript(qScriptUrl, data.gtmOnSuccess, data.gtmOnFailure);
+}
 
 // fire the tag
 sendPixel(qPixelUrl, data.gtmOnSuccess, data.gtmOnFailure);
