@@ -74,13 +74,14 @@ const getQueryParameters = require('getQueryParameters');
 
 const MID = data.MID;
 const PID = data.PID;
+const cookieName = 'OMG-' + MID;
 
 //create cookie
 if(getQueryParameters('sskey') != undefined) {
   var domain = getUrl('host');
   var cookieString = 'SSKey=' + getQueryParameters('sskey') + '&fpc=true';
   const options = {'domain': domain,'path': '/','max-age': 60*60*24*30,'samesite': 'none','secure': true};
-  setCookie('optimiseevent', cookieString, options);
+  setCookie(cookieName, cookieString, options);
 }
 
 // Declare script
@@ -89,7 +90,7 @@ var url = 'https://track.omguk.com/e/qi/?action=Content&MID=' + encodeUriCompone
 
 // Add cookie string if present
 //if(queryPermission('get_cookies')) { 
-  url = url + '&' + getCookieValues('optimiseevent',true);
+  url = url + '&' + getCookieValues(cookieName, true);
 //}
 
 // write debug logs
@@ -97,7 +98,7 @@ log(url);
 log('MID = ', encodeUriComponent(data.MID));
 log('PID = ', encodeUriComponent(data.PID));
 log('SSKEY = ' + getQueryParameters('sskey'));
-log('Cookie = ' + getCookieValues('optimiseevent',true));
+log('Cookie = ' + getCookieValues(cookieName, true));
 
 // fire the tag
 sendPixel(url, data.gtmOnSuccess, data.gtmOnFailure);
@@ -186,7 +187,19 @@ ___WEB_PERMISSIONS___
           "key": "cookieAccess",
           "value": {
             "type": 1,
-            "string": "any"
+            "string": "specific"
+          }
+        },
+        {
+          "key": "cookieNames",
+          "value": {
+            "type": 2,
+            "listItem": [
+              {
+                "type": 1,
+                "string": "OMG-*"
+              }
+            ]
           }
         }
       ]
@@ -235,7 +248,7 @@ ___WEB_PERMISSIONS___
                 "mapValue": [
                   {
                     "type": 1,
-                    "string": "optimiseevent"
+                    "string": "OMG-*"
                   },
                   {
                     "type": 1,
@@ -276,5 +289,4 @@ scenarios: []
 ___NOTES___
 
 Created on 15/07/2020, 09:40:23
-
 
