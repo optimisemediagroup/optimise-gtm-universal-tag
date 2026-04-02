@@ -75,30 +75,33 @@ const getQueryParameters = require('getQueryParameters');
 const MID = data.MID;
 const PID = data.PID;
 const cookieName = 'OMG-' + MID;
+const ssKey = getQueryParameters('sskey');
+const host = getUrl('host');
+const currentUrl = getUrl();
 
 //create cookie
-if(getQueryParameters('sskey') != undefined) {
-  var domain = getUrl('host');
-  var cookieString = 'SSKey=' + getQueryParameters('sskey') + '&fpc=true';
-  const options = {'domain': domain,'path': '/','max-age': 60*60*24*30,'samesite': 'none','secure': true};
+if(ssKey != undefined) {
+  var cookieString = 'SSKey=' + ssKey + '&fpc=true';
+  const options = {'domain': host,'path': '/','max-age': 60*60*24*30,'samesite': 'none','secure': true};
   setCookie(cookieName, cookieString, options);
 }
 
 // Declare script
-var ORef = encodeUriComponent(getUrl());
+var ORef = encodeUriComponent(currentUrl);
 var url = 'https://track.omguk.com/e/qi/?action=Content&MID=' + encodeUriComponent(MID) + '&PID=' + encodeUriComponent(PID) + '&ref=' + ORef;
+const cookieValues = getCookieValues(cookieName, true);
 
 // Add cookie string if present
 //if(queryPermission('get_cookies')) { 
-  url = url + '&' + getCookieValues(cookieName, true);
+  url = url + '&' + cookieValues;
 //}
 
 // write debug logs
 log(url);
-log('MID = ', encodeUriComponent(data.MID));
-log('PID = ', encodeUriComponent(data.PID));
-log('SSKEY = ' + getQueryParameters('sskey'));
-log('Cookie = ' + getCookieValues(cookieName, true));
+log('MID = ', encodeUriComponent(MID));
+log('PID = ', encodeUriComponent(PID));
+log('SSKEY = ' + ssKey);
+log('Cookie = ' + cookieValues);
 
 // fire the tag
 sendPixel(url, data.gtmOnSuccess, data.gtmOnFailure);
@@ -187,19 +190,7 @@ ___WEB_PERMISSIONS___
           "key": "cookieAccess",
           "value": {
             "type": 1,
-            "string": "specific"
-          }
-        },
-        {
-          "key": "cookieNames",
-          "value": {
-            "type": 2,
-            "listItem": [
-              {
-                "type": 1,
-                "string": "OMG-*"
-              }
-            ]
+            "string": "any"
           }
         }
       ]
@@ -289,4 +280,3 @@ scenarios: []
 ___NOTES___
 
 Created on 15/07/2020, 09:40:23
-
