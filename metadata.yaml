@@ -2,7 +2,7 @@ homepage: "https://www.optimisemedia.com",
 documentation: "https://knowledge.optimisemedia.com/docs/advertiserimplementation#google-tag-manager",
 versions:
   # Latest version
-  - sha: c08cdc221c617f560902a6c14fa7ac8b5c70d214
+  - sha: c08cdc26e2910c6a59c72ae55e53cda6e4444b98
     changeNotes: Allow dynamic OMG cookie reads
   - sha: fbecb798e1f80092f729a240339ce41df1126ec9
     changeNotes: Change cookie name to OMG-{MID}
