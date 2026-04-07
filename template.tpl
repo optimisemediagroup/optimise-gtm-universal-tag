@@ -239,7 +239,7 @@ ___WEB_PERMISSIONS___
                 "mapValue": [
                   {
                     "type": 1,
-                    "string": "OMG-*"
+                    "string": "*"
                   },
                   {
                     "type": 1,
